@@ -1,15 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Evaluation2 - Hamed Tara</title>
-  </head>
+<html>
+  <head> </head>
   <body>
-    <label> Your Email Adress :*</label>
-    <input type="text" name="emailAdress" size="15" /> <br />
-    <label> Data of Visit :*</label>
-    <input type="date" name="dateOfVisit" size="15" /> <br />
-    <label>Your Comment :</label> <br />
-    <textarea cols="80" rows="5" value="address"> </textarea>
-    <br />
+    <style>
+      #txtbx {
+        width: 500px;
+        height: 200px;
+      }
+      #form {
+        background-color: #9ff9b3;
+
+        border: 30px;
+        padding: 2px;
+      }
+      .input {
+        margin-bottom: 10px;
+      }
+    </style>
+    <center><h1>Give Us Your Valuable Feedback</h1></center>
+    <form id="form">
+      <label for id="em">Your Email*:</label>
+      <input id="em" class="input" />
+      <br />
+      <label for id="dt">Date Of Visit</label>
+      <input id="dt" type="date" class="input" />
+      <br />
+      <label for id="txtbx">Your Comment:</label>
+      <br />
+      <input type="text" id="txtbx" class="input" />
+      <br />
+      <button type="submit">Send your feedback</button>
+    </form>
   </body>
 </html>

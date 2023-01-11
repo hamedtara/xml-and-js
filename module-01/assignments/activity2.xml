@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <data>
+    <employee>
+        <Emp>
+            <empNum>1001</empNum>
+            <name1>Alex</name1>
+            <sal>3000</sal>
+        </Emp>
 
-      <Empno>
-      <num1>1001</num1>
-      <num1>1002</num1>
-      <num1>1003</num1>
-      </Empno>
+        <Emp>
+            <empNum>1002</empNum>
+            <name1>Sarah</name1>
+            <sal>4000</sal>
+        </Emp>
 
-      <Empname>
-      <name1>Alex</name>
-      <name1>Sarah</name>
-      <name1>Peter</name>
-      </Empname>
+        <Emp>
+            <empNum>1003</empNum>
+            <name1>Peter</name1>
+            <sal>3500</sal>
+        </Emp>
 
-
-      <Salary>
-      <name1>3000</name>
-      <name1>4000</name>
-      <name1>3500</name>
-      </Salary>
+    </employee>
 
 
 </data>
