@@ -1,0 +1,7 @@
+customers - root
+customer - array,element
+custId - array,element
+name - element,string
+address - string , element
+phone - string, element 
+email - string , element
