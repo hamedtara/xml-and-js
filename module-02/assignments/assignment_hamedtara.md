@@ -26,7 +26,7 @@ CDATA or Character Data, It is used to mark a section of an XML document so that
 
 3. Add comment line to the end of file which contains you name and student id
 
-<!-- hamed tara - n01540404 XML and Java Script - ITC-5202-IGA
+<!-- hamed tara - n01540404 XML and Java Script - ITC-5202-IGA -
 -->
 
 4. Identify prolog, document body, and epilog in the document. Are there any processing instructions?
