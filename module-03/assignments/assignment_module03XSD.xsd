@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:element name="catalog" type="catalogType" />
+    <!-- catalog is the root element and it defined by complexType "catalogType" -->
+    <xs:complexType name="catalogType">
+        <!-- I used complextype becuase it contains elements and attributes   -->
+        <xs:sequence>
+            <!-- defines a child element "product" of "catalogType" which has a type of
+            "productType" and allows for an unbounded number of occurrences. -->
+            <xs:element name="product" type="productType" maxOccurs="unbounded"></xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="productType">
+        <xs:sequence>
+            <xs:element name="catalog_item" type="catalogItemType" maxOccurs="unbounded"></xs:element>
+        </xs:sequence>
+        <!-- product contains 3 attributes product_id , description and product_image-->
+        <xs:attribute name="product_id" type="xs:ID" use="required"></xs:attribute>
+        <xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+        <xs:attribute name="product_image" type="xs:string" use="required"></xs:attribute>
+    </xs:complexType>
+
+    <xs:complexType name="catalogItemType">
+        <!-- declares a new complex type called "catalogItemType", which is used to define the
+        structure of the elements with the name "catalog_item" in the XML document.
+        -->
+
+        <xs:sequence>
+            <xs:element name="item_number" type="xs:string"></xs:element>
+            <xs:element name="price" type="xs:decimal"></xs:element>
+            <xs:element name="size" type="sizeType" maxOccurs="unbounded"></xs:element>
+        </xs:sequence>
+
+        <!-- This line specifies an attribute called "gender" that is required for the
+        "catalogItemType" complex type. The attribute is a simple type that is restricted to the
+        string values "Men" or "Women". This means that when the attribute is used in an XML
+        document, it can only have the values "Men" or "Women". The restriction is used to ensure
+        that the attribute is used consistently and correctly throughout the XML document.-->
+        <xs:attribute name="gender" use="required">
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="Men" />
+                    <xs:enumeration value="Women" />
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:complexType>
+    <xs:complexType name="sizeType">
+        <xs:sequence>
+            <xs:element name="color_swatch" type="color_SwatchType" maxOccurs="unbounded"></xs:element>
+        </xs:sequence>
+        <xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+    </xs:complexType>
+    <xs:complexType name="color_SwatchType">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="image" type="xs:string" use="required"></xs:attribute>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <!-- The <xs:complexType name="color_SwatchType"> element defines a complex type for a color
+    swatch.The <xs:simpleContent> element is used to extend or restrict a simple type. In thiscase,
+    it is extending the built-in xs:string simple type by adding an attribute, image, of
+    type
+    xs:string and with a use of "required", meaning it must be present in any instance of
+    this
+    type. This allows the color swatch to have both a color value (inherited from the
+    xs:string
+    base type) and
+    an image attribute.-->
+</xs:schema>

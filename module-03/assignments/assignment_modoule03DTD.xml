@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!DOCTYPE catalog [
+  <!ELEMENT catalog (product)>
+  <!ELEMENT product (catalog_item+)>
+  <!-- I wrote this because the "product" element in the XML document is followed by one or more
+  "catalog_item" elements.-->
+  <!ATTLIST product product_id ID #REQUIRED>
+  <!ATTLIST product description CDATA #REQUIRED>
+  <!ATTLIST product product_image CDATA #REQUIRED>
+  <!-- I wrote this to specify that the "product" element must have three attributes:
+  "product_id","description", "product_image", and all of them are required for the element to be
+  valid.-->
+  <!ELEMENT catalog_item (item_number,price,size+)>
+  <!-- I wrote this becuase the "catalog_item" in the XML document is followed by mentioned elements  -->
+  <!ATTLIST catalog_item gender (Men | Women) #REQUIRED >
+  <!-- I wrote this to specify that the "catalog_item" element must have an attribute which is
+  called gender and gender valuse must be Men or women-->
+  <!ELEMENT item_number (#PCDATA)>
+  <!ELEMENT price (#PCDATA)>
+  <!-- I wrote these becuase item_number and price contain  parsed character data  (String) -->
+
+  <!ELEMENT size (color_swatch+)>
+  <!-- I wrote this because the "size" element in the XML document is followed by one or more
+  "color_swatch" elements.-->
+  <!ATTLIST size description CDATA #REQUIRED>
+  <!-- I wrote this to specify that the attribute "description" is added for the "size" element
+  because it provides additional information about the size of the product.  -->
+  <!ELEMENT color_swatch (#PCDATA)>
+  <!ATTLIST color_swatch image CDATA #REQUIRED>
+]>
+
+
+<catalog>
+  <product product_id="e4892f6a-7cce-11ec-90d6-0242ac120003" description="Cardigan Sweater"
+    product_image="cardigan.jpg">
+    <catalog_item gender="Men">
+      <item_number>QWZ5671</item_number>
+      <price>39.95</price>
+      <size description="Medium">
+        <color_swatch image="red_cardigan.jpg">Red</color_swatch>
+        <color_swatch image="burgundy_cardigan.jpg">Burgundy</color_swatch>
+      </size>
+      <size description="Large">
+        <color_swatch image="red_cardigan.jpg">Red</color_swatch>
+        <color_swatch image="burgundy_cardigan.jpg">Burgundy</color_swatch>
+      </size>
+    </catalog_item>
+    <catalog_item gender="Women">
+      <item_number>RRX9856</item_number>
+      <price>42.50</price>
+      <size description="Small">
+        <color_swatch image="red_cardigan.jpg">Red</color_swatch>
+        <color_swatch image="navy_cardigan.jpg">Navy</color_swatch>
+        <color_swatch image="burgundy_cardigan.jpg">Burgundy</color_swatch>
+      </size>
+      <size description="Medium">
+        <color_swatch image="red_cardigan.jpg">Red</color_swatch>
+        <color_swatch image="navy_cardigan.jpg">Navy</color_swatch>
+        <color_swatch image="burgundy_cardigan.jpg">Burgundy</color_swatch>
+        <color_swatch image="black_cardigan.jpg">Black</color_swatch>
+      </size>
+      <size description="Large">
+        <color_swatch image="navy_cardigan.jpg">Navy</color_swatch>
+        <color_swatch image="black_cardigan.jpg">Black</color_swatch>
+      </size>
+      <size description="Extra Large">
+        <color_swatch image="burgundy_cardigan.jpg">Burgundy</color_swatch>
+        <color_swatch image="black_cardigan.jpg">Black</color_swatch>
+      </size>
+    </catalog_item>
+  </product>
+</catalog>
