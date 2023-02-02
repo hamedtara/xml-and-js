@@ -3,6 +3,7 @@
     <xsl:template match="/">
         <html>
             <body>
+
                 <!-- Table 1 : shippable items -->
                 <h2>Shippable Items : </h2>
                 <table border="1">
