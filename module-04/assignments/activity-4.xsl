@@ -14,7 +14,6 @@
                         <th>Description</th>
                         <th>USD price</th>
                     </tr>
-
                     <!-- Checking shippable items -->
                     <xsl:for-each select="//product[@shippable='true']">
 
