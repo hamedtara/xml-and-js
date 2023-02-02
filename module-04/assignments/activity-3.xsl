@@ -9,6 +9,7 @@
                     <xsl:for-each select="products/product">
                         <li>
                             <xsl:value-of select="productName" />
+
                         </li>
                     </xsl:for-each>
                 </ol>

@@ -17,6 +17,7 @@
 
                     <!-- Checking shippable items -->
                     <xsl:for-each select="//product[@shippable='true']">
+
                         <tr>
                             <td>
                                 <xsl:value-of select="productName" />
