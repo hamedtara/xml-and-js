@@ -6,6 +6,7 @@
         <manufacturer id="sjb-pet">SJB Pet Boutique</manufacturer>
         <description>Something for every day of the week</description>
         <prices>
+
             <price>US$35.99</price>
             <price>CAD$44.99</price>
             <price>&#8364;26.79</price>

@@ -7,6 +7,7 @@
 - main title is "Catalog"
 - use html list tag to display catalog
 - render each item as `<article>` inside list item tag
+
 - display product id as h3
 - display product description as paragraph
 - render table of catalog items with columns: item number, price, gender, small, medium, large, extra large (if column item is not present in item, then display empty cell)

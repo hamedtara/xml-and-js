@@ -7,6 +7,7 @@
                 <h2>Shippable Items : </h2>
                 <table border="1">
                     <tr bgcolor="#9acd32">
+
                         <!-- Product name, Manufacturer id, Description, USD price-->
                         <th>Product Name</th>
                         <th>Manufacturer ID</th>
