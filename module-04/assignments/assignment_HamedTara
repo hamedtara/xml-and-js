@@ -1,0 +1,162 @@
+![image info](assignmt_hamedtara.png)
+
+Part1:
+
+<xsl:template match="/">
+
+<html>
+<head>
+<title>Catalog</title>
+<style>
+td{
+vertical-align: top;
+}
+</style>
+</head>
+<body>
+<h1>Catalog</h1>
+<ul>
+<xsl:apply-templates select="catalog/product" />
+</ul>
+</body>
+</html>
+</xsl:template>
+
+Description:
+
+This XSLT template is used to define the structure of an HTML document. It defines the basic structure of an HTML document, including a head section with a title and a style section, and a body section with a header and a list. The xsl:apply-templates instruction is used to apply templates to the selected "catalog/product" nodes of the input XML document and generate the content of the list. These templates help to define the transformation of the input XML document into the desired HTML document.
+
+Part2 :
+<xsl:template match="product">
+
+<li>
+<article>
+<h3>
+<xsl:value-of select="@product_id" />
+</h3>
+<p>
+<xsl:value-of select="@description" />
+</p>
+<table border="2">
+<tr bgcolor="#9acd32">
+<th>Item Number</th>
+<th>Price</th>
+<th>Gender</th>
+<th>Small</th>
+<th>Medium</th>
+<th>Large</th>
+<th>Extra Large</th>
+</tr>
+<xsl:apply-templates select="catalog_item" />
+</table>
+</article>
+</li>
+</xsl:template>
+<xsl:template match="catalog_item">
+<tr>
+<td>
+<xsl:value-of select="item_number" />
+</td>
+<td>
+<xsl:value-of select="price" />
+</td>
+<td>
+<xsl:choose>
+<xsl:when test="@gender='Men'">M</xsl:when>
+<xsl:when test="@gender='Women'">W</xsl:when>
+</xsl:choose>
+</td>
+<xsl:apply-templates select="size " />
+</tr>
+</xsl:template>
+
+These lines of XSLT code define two templates, one for matching the "product" element and the other for matching the "catalog_item" element, in the source XML document. The templates are used to transform the XML data into an HTML document. The first template generates a list item for each "product" element in the XML and displays its product_id and description. The second template generates a table row for each "catalog_item" element and displays its item_number, price, gender, and size.
+
+<xsl:template match="catalog_item">
+
+<tr>
+<td>
+<xsl:value-of select="item_number" />
+</td>
+<td>
+<xsl:value-of select="price" />
+</td>
+<td>
+<xsl:choose>
+<xsl:when test="@gender='Men'">M</xsl:when>
+<xsl:when test="@gender='Women'">W</xsl:when>
+</xsl:choose>
+</td>
+<td>
+<xsl:if test="size[@description='Small']">
+                    <table border="1">
+                        <tr>
+                            <th bgcolor="#9acd32">Color</th>
+                            <th bgcolor="#9acd32">Image</th>
+                        </tr>
+                        <xsl:apply-templates select="size[@description='Small']/color_swatch" />
+                    </table>
+                </xsl:if>
+            </td>
+            <td>
+                <xsl:if test="size[@description='Medium']">
+                    <table border="1">
+                        <tr>
+                            <th bgcolor="#9acd32">Color</th>
+                            <th bgcolor="#9acd32">Image</th>
+                        </tr>
+                        <xsl:apply-templates select="size[@description='Medium']/color_swatch" />
+                    </table>
+                </xsl:if>
+            </td>
+            <td>
+                <xsl:if test="size[@description='Large']">
+                    <table border="1">
+                        <tr>
+                            <th bgcolor="#9acd32">Color</th>
+                            <th bgcolor="#9acd32">Image</th>
+                        </tr>
+                        <xsl:apply-templates select="size[@description='Large']/color_swatch" />
+                    </table>
+                </xsl:if>
+            </td>
+            <td>
+                <xsl:if test="size[@description='Extra Large']">
+                    <table border="1">
+                        <tr>
+                            <th bgcolor="#9acd32">Color</th>
+                            <th bgcolor="#9acd32">Image</th>
+                        </tr>
+                        <xsl:apply-templates
+                            select="size[@description='Extra Large']/color_swatch" />
+                    </table>
+                </xsl:if>
+            </td>
+        </tr>
+    </xsl:template>
+
+These lines are part of an XSLT stylesheet, and they describe the template for transforming the data in an XML file into a presentation in HTML. The <xsl:template match="catalog_item"> line defines a template that will be applied to elements in the XML file that match the pattern "catalog_item".
+
+The body of this template defines the HTML structure for presenting the data from each catalog_item element in the XML file. The <xsl:value-of select="item_number" /> and <xsl:value-of select="price" /> elements retrieve the values of the item_number and price elements within each catalog_item element.
+
+The <xsl:choose> element is used to determine the value to be displayed for the gender attribute of each catalog_item element. If the value of the gender attribute is "Men", the letter "M" will be displayed. If the value is "Women", the letter "W" will be displayed.
+
+The <xsl:if> elements are used to conditionally display tables of color swatches and images for each size of the product. If the description attribute of a size element is "Small", a table will be displayed with the color and image information for that size. Similar conditional logic is used for the other sizes of the product.
+
+The <xsl:apply-templates> elements are used to apply templates to elements within the catalog_item element. For example, the <xsl:apply-templates select="size[@description='Small']/color_swatch" /> line applies a template to each color_swatch element within the size element that has a description attribute with a value of "Small".
+
+These lines define an XSLT template for transforming XML elements with the name "color_swatch". The template matches elements of this name and specifies how to produce the output.
+
+In this case, the output is in the form of an HTML table row, with two cells. The first cell displays the value of the color_swatch element and the second cell displays the value of its "image" attribute.
+
+<xsl:template match="color_swatch">
+
+<tr>
+<td>
+<xsl:value-of select="." />
+</td>
+<td>
+<xsl:value-of select="@image" />
+</td>
+</tr>
+</xsl:template>
