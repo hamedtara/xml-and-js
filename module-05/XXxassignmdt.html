@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <table id="table" border="1">
+      <tr bgcolor="#B020D0">
+        <td>Customer ID</td>
+        <td>customer Name</td>
+        <td>Address</td>
+        <td>Phone</td>
+        <td>email</td>
+        <td>Order ID</td>
+        <td>Order Date</td>
+        <td>Item Price</td>
+        <td>Item Quantity</td>
+      </tr>
+    </table>
+    <script>
+      const xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function () {
+        if (this.readyState === 4 && this.status === 200) {
+          displayData(this.responseXML);
+        }
+      };
+
+      xhr.open("GET", "customers.xml", true);
+      xhr.send();
+      const parseCustomer = (customer) => {
+        const custID = customer.getAttribute("custID");
+        const tname = customer
+          .getElementsByTagName("name")[0]
+          .getAttribute("title");
+    </script>
+  </body>
+</html>
