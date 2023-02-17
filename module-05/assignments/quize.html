@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Web Page</title>
+    <script>
+      // Load the XML file
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          // Parse the XML data
+          var xmlData = this.responseXML;
+
+          // Get the list of books
+          var books = xmlData.getElementsByTagName("book");
+
+          // Create the four different parts of the page
+          var part1 = document.createElement("div");
+          part1.innerHTML = "<h1>Books on Cooking</h1>";
+          var part2 = document.createElement("div");
+          part2.innerHTML = "<h1>Books for Children</h1>";
+          var part3 = document.createElement("div");
+          part3.innerHTML = "<h1>Books on the Web</h1>";
+          var part4 = document.createElement("div");
+          part4.innerHTML = "<h1>All Books</h1>";
+
+          // Loop through the books and add them to the appropriate part of the page
+          for (var i = 0; i < books.length; i++) {
+            var title =
+              books[i].getElementsByTagName("title")[0].childNodes[0].nodeValue;
+            var author =
+              books[i].getElementsByTagName("author")[0].childNodes[0]
+                .nodeValue;
+            var year =
+              books[i].getElementsByTagName("year")[0].childNodes[0].nodeValue;
+            var price =
+              books[i].getElementsByTagName("price")[0].childNodes[0].nodeValue;
+            var category =
+              books[i].getElementsByTagName("category")[0].childNodes[0]
+                .nodeValue;
+
+            var bookDiv = document.createElement("div");
+            bookDiv.innerHTML =
+              "<strong>" +
+              title +
+              "</strong><br>" +
+              "Author: " +
+              author +
+              "<br>" +
+              "Year: " +
+              year +
+              "<br>" +
+              "Price: $" +
+              price;
+
+            if (category == "cooking") {
+              part1.appendChild(bookDiv);
+            } else if (category == "children") {
+              part2.appendChild(bookDiv);
+            } else if (category == "web") {
+              part3.appendChild(bookDiv);
+            }
+
+            part4.appendChild(bookDiv.cloneNode(true));
+          }
+
+          // Add the parts to the page
+          var body = document.getElementsByTagName("body")[0];
+          body.appendChild(part1);
+          body.appendChild(part2);
+          body.appendChild(part3);
+          body.appendChild(part4);
+        }
+      };
+      xhttp.open("GET", "books.xml", true);
+      xhttp.send();
+    </script>
+  </head>
+  <body></body>
+</html>
