@@ -7,20 +7,35 @@ const data1 = [
   
   const parsed=data1.map((data1)=>
   ({
+
       Age: data1.died-data1.born
   })
   );
   
-
   console.log(parsed);
-
-  console.log("-------");
-
+  console.log('----------------------------------------')
   const filtered=parsed.filter(data1=>data1.Age>75);
   console.log(filtered);
-  console.log("-------");
+  console.log('----------------------------------------')
   const oldest=filtered.reduce((acc, data1)=>
   {
+      if(!acc || data1.Age > acc.Age)
+      {
+
+          return data1.Age;
+      }
+       else{
+          return acc.Age;
+      }
+  }, null);
+  console.log("oldest:" +oldest);
+  console.log('-------');
+  console.log('Refactoreed code Chaining verions ');
+  console.log('----------');
+  const oldest_chained = data1
+    .map((data1) => ({ Age: data1.died - data1.born }))
+    .filter((data1) => data1.Age > 75)
+    .reduce((acc, data1) => {
       if(!acc || data1.Age > acc.Age)
       {
           return data1.Age;
@@ -28,5 +43,5 @@ const data1 = [
           return acc.Age;
       }
   }, null);
-  
-  console.log("oldest:" +oldest);
+
+  console.log('oldest : ' + oldest_chained);
