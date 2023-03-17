@@ -1,4 +1,6 @@
+const { rejects } = require("assert");
 const fs = require("fs");
+const { resolve } = require("path");
 let filename = `${__dirname}/books.json`;
 
 fs.exists(filename, (exists) => {
@@ -22,3 +24,6 @@ fs.exists(filename, (exists) => {
     throw new Error("404: file not found");
   }
 });
+
+
+
