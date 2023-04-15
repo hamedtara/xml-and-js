@@ -17,7 +17,7 @@ const getToken = async () => {
 
 const getGenres = async (token) => {
   const result = await fetch(
-    `https://api.spotify.com/v1/browse/categories?locale=sv_US`,
+    `https://api.spotify.com/v1/browse/categories`,
     {
       method: "GET",
       headers: { Authorization: "Bearer " + token },
@@ -43,38 +43,69 @@ const getPlaylistByGenre = async (token, genreId) => {
   return data.playlists.items;
 };
 
-const loadGenres = async () => {
-  const token = await getToken();
-  const genres = await getGenres(token);
-  const list = document.getElementById(`genres`);
-  genres.map(async ({ name, id, icons: [icon], href }) => {
-    const playlists = await getPlaylistByGenre(token, id);
-    const playlistsList = playlists
-      .map(
-        ({ name, external_urls: { spotify }, images: [image] }) => `
-        <li>
-          <a href="${spotify}" alt="${name}" target="_blank">
-            <img src="${image.url}" width="180" height="180"/>
-          </a>
-        </li>`
-      )
-      .join(``);
-
-    if (playlists) {
-      const html = `
-      <article class="genre-card">
-        <img src="${icon.url}" width="${icon.width}" height="${icon.height}" alt="${name}"/>
-        <div>
-          <h2>${name}</h2>
-          <ol>
-            ${playlistsList}
-          </ol>
-        </div>
-      </article>`;
-
-      list.insertAdjacentHTML("beforeend", html);
+const getTracksForPlaylist = async (token, playlistId) => {
+  const result = await fetch(
+    `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
+    {
+      method: "GET",
+      headers: { Authorization: "Bearer " + token },
     }
-  });
+  );
+
+  const data = await result.json();
+  return data.items;
 };
 
-loadGenres();
+const loadGenres = async () => {
+    const token = await getToken();
+    const genres = await getGenres(token);
+    const list = document.getElementById(`genres`);
+    const withPlaylistsRadio = document.querySelector(`input[value="with-playlists"]`);
+    const withoutPlaylistsRadio = document.querySelector(`input[value="without-playlists"]`);
+
+    genres.map(async ({ name, id, icons: [icon], href }) => {
+      const playlists = await getPlaylistByGenre(token, id);
+
+      if (withPlaylistsRadio.checked && playlists.length === 0) {
+        return; // skip to next genre if filtering by "with playlists" but there are none
+      } else if (withoutPlaylistsRadio.checked && playlists.length > 0) {
+        return; // skip to next genre if filtering by "without playlists" but there are some
+      }
+
+      const playlistsList = await Promise.all(playlists.map(async ({ name, id }) => {
+        const tracks = await getTracksForPlaylist(token, id);
+        const tracksList = tracks
+          .map(({ track: { name: trackName, artists } }) => `
+            <li>${trackName} - ${artists.map(artist => artist.name).join(', ')}</li>
+          `)
+          .join('');
+
+        return `
+          <li>
+            <h3>${name}</h3>
+            <ul>
+              ${tracksList}
+            </ul>
+          </li>
+        `;
+      }));
+
+      const html = `
+        <article class="genre-card">
+          <img src="${icon.url}" width="${icon.width}" height="${icon.height}" alt="${name}"/>
+          <div>
+            <h2>${name}</h2>
+            <ol>
+              ${playlistsList.join('')}
+            </ol>
+          </div>
+        </article>
+      `;
+
+      list.insertAdjacentHTML("beforeend", html);
+    });
+  };
+
+  const filterRadios = document.querySelectorAll(`input[name="playlist-filter"]`);
+  filterRadios.forEach(radio => radio.addEventListener("change", loadGenres));
+  loadGenres();  
