@@ -1,0 +1,24 @@
+*{
+    background-color: black;
+    color: white;
+}
+/*Change font-size of `originalName*/
+
+originalName{
+    font-size: 20px;
+    display: block;
+    color: rgb(0, 255, 200);
+}
+/* Display each `category` on the new line - we should use display tag for this question */
+category{
+    display: block;
+    color: yellowgreen;
+
+}
+
+/* Add any other css-rule - I used bold as a symbole of changing font-style type of description */
+description{
+    font-style: bold;
+    font-size: 17px;
+
+}
